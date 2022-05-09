@@ -6,7 +6,7 @@ export const pokemonsPorTipo = async (tipo) => {
 }
 
 export const pokemonHome = async () => {
-  const url = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=20';
+  const url = 'https://pokeapi.co/api/v2/pokemon?limit=50&offset=20';
   const data = await fetch(url);
   const dataJson = await data.json();
   return dataJson;

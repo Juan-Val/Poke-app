@@ -1,17 +1,16 @@
 import React, { useEffect,useState } from 'react'
 import { pokemonHome } from '../api/getPokemonTipos';
 import { CardPokemon } from './CardPokemon'
+import { Loading } from './Loading';
 
 export const ContenedorPokemon = () => {
 
   const [pokemon, setPokemon] = useState([]);
 
-
   const pokemons = async () => {
     const data = await pokemonHome();
     const { results } = data;
     setPokemon(results);
-    console.log(results)
   }
 
   useEffect(() => {
