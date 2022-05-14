@@ -1,23 +1,35 @@
 import { useState, useEffect, useRef } from "react";
 
-export function useNearScreen(options) {
-  const ref = useRef();
-
-  const [inView, setInView] = useState(false);
-  const [entry, setEntry] = useState(null);
+export default function useNearScreen() {
+  const [isNearScreen, setIsNearScreen] = useState(false);
+  const fromRef = useRef();
 
   useEffect(() => {
-    if (!ref.current) return;
+    let observer
 
-    const callback = (entries, observer) => {
-      setEntry(entries[0]);
-      setInView(entries[0].isIntersecting);
-    };
+    const onChange = (entries, observer) => {
+      const el = entries[0];
+      if(el.isIntersecting) {
+        setIsNearScreen(true);
+        observer.disconnect();
+      }
+    }
 
-    const observer = new IntersectionObserver(callback, options);
+    Promise.resolve(
+      typeof IntersectionObserver !== 'undefined' ? IntersectionObserver :
+      import('intersection-observer') 
+    ).then(()=>{
+      observer = new IntersectionObserver(onChange,{
+        rootMargin: '100px'
+      });
 
-    observer.observe(ref.current);
-  }, [ref.current]);
+      observer.observe(fromRef.current);
 
-  return [ref, inView, entry];
+    })
+
+    return () => observer && observer.disconnect();
+
+  }, [])
+
+  return {isNearScreen, fromRef}
 }

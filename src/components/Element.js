@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { pokemonHome } from '../api/getPokemonTipos';
+import { getPokemon, pokemonHome } from '../api/getPokemonTipos';
 import { CardPokemon } from './CardPokemon'
 
 export const Element = () => {
@@ -9,8 +9,8 @@ export const Element = () => {
   const {name} = useParams();
 
   const item = {
-    name,
-    url: `https://pokeapi.co/api/v2/pokemon/${name}/`
+    name: name.toLowerCase(),
+    url: `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}/`
   }
 
 

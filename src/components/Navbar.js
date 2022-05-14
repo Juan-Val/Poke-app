@@ -25,12 +25,13 @@ export const Navbar = () => {
   const handleHome = () => {
     navigate('');
   }
+  
 
   return (
-    <div className=' fixed overflow-y-scroll bg-blanco z-10'>
+    <div className=' fixed overflow-y-scroll bg-blanco z-10 min-h-[100%]'>
     <nav className='w-66  drop-shadow-lg p-2 h-screen rounded-md'>
       <SearchForm handleSubmit={handleSubmit}/>
-      <div className=' mt-2'>
+      <div className=' mt-2 min-h-[100%]'>
       <div className='p-2 flex items-center'>
       <button className='bg-gris text-azul drop-shadow-md capitalize rounded-md p-2 w-full hover:bg-rojo-oscuro hover:text-blanco transition ease-in-out delay-250' onClick={handleHome} >Home</button>
     </div>
@@ -40,6 +41,7 @@ export const Navbar = () => {
           )
         }
       </div>
+    
     </nav>
         </div>
   )
